@@ -72,8 +72,9 @@ function showContact(contactId) {
   $(".first-name").html(contact.firstName);
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
-  $(".email").html(contact.email);
-  $(".address").html(contact.address);
+  $(".email").html(contact.email.join(", "));
+  $(".address").html(contact.address.join(", "));
+  console.log(contact.address)
   let buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
@@ -87,13 +88,15 @@ $(document).ready(function() {
     const inputtedLastName = $("input#new-last-name").val();
     const inputtedPhoneNumber = $("input#new-phone-number").val();
     const inputtedEmail = $("input#new-email").val();
+    const inputtedEmails = inputtedEmail.split(" ")
     const inputtedAddress = $("input#new-address").val();
+    const inputtedAddresss = inputtedAddress.split(" ")
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
     $("input#new-phone-number").val("");
     $("input#new-email").val("");
     $("input#new-address").val("");
-    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, inputtedAddress);
+    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmails, inputtedAddresss);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   });
